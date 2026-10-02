@@ -93,13 +93,13 @@ const UI = () => {
             onClick={() => handleClick("/")}
             className="h-11 rounded-xl bg-blue-600 text-white"
           >
-            /
+            ÷
           </button>
           <button
             onClick={() => handleClick("*")}
             className="h-11 rounded-xl bg-blue-600 text-white"
           >
-            *
+            x
           </button>
           <button
             onClick={() => handleClick("7")}
