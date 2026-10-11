@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 const UI = () => {
   const removeOneElement = () => {
-    setDisplay(display.slice(0, -1));
-  };
+    setDisplay(display.slice(0, -1));};
   const [display, setDisplay] = useState("");
   const [darkMode, setDarkMode] = useState(false);
+  const [degreeMode, setDegreeMode] = useState(false);
   const handleClick = (value) => {
     setDisplay(display + value);
   };
@@ -18,6 +18,33 @@ const UI = () => {
     } catch {
       setDisplay("Error");
     }
+  };
+  const handleE = () => {
+    setDisplay(Math.E.toString());
+  };
+  const handleMicro = () => {
+    setDisplay("0.000001");
+  };
+  const handleSin = () => {
+    try {
+      const number = parseFloat(display);
+      if (isNaN(number)) {
+        setDisplay("Error");
+        return;
+      }
+      let result;
+      if (degreeMode) {
+        result = Math.sin((number * Math.PI) / 180);
+      } else {
+        result = Math.sin(number);
+      }
+      setDisplay(result.toString());
+    } catch {
+      setDisplay("Error");
+    }
+  };
+  const handleDegree = () => {
+    setDegreeMode(!degreeMode);
   };
   return (
     <div className="absolute left-175 top-30 max-[768px]:left-1/2 max-[768px]:-translate-x-1/2 max-[768px]:top-20">
@@ -50,7 +77,6 @@ const UI = () => {
             🌙
           </button>
         </div>
-        {/* Display */}
         <div
           className={`h-[100px] rounded-2xl mb-5 p-4 flex flex-col justify-end items-end overflow-hidden ${
             darkMode ? "bg-[#242424]" : "bg-white"
@@ -60,22 +86,36 @@ const UI = () => {
             {display ? `${display}` : "0"}
           </span>
         </div>
-        {/* Small buttons */}
         <div className="grid grid-cols-4 gap-2 mb-3">
-          <button className="h-8 rounded-lg text-xs bg-white/50">
+          <button
+            onClick={handleE}
+            className="h-8 rounded-lg text-xs bg-white/50"
+          >
             e
           </button>
-          <button className="h-8 rounded-lg text-xs bg-white/50">
+          <button
+            onClick={handleMicro}
+            className="h-8 rounded-lg text-xs bg-white/50"
+          >
             μ
           </button>
-          <button className="h-8 rounded-lg text-xs bg-white/50">
+          <button
+            onClick={handleSin}
+            className="h-8 rounded-lg text-xs bg-white/50"
+          >
             sin
           </button>
-          <button className="h-8 rounded-lg text-xs bg-white/50">
+          <button
+            onClick={handleDegree}
+            className={`h-8 rounded-lg text-xs ${
+              degreeMode
+                ? "bg-blue-500 text-white"
+                : "bg-white/50"
+            }`}
+          >
             deg
           </button>
         </div>
-        {/* Calculator Buttons */}
         <div className="grid grid-cols-4 gap-2">
           <button
             onClick={clear}
@@ -182,7 +222,8 @@ const UI = () => {
           <button
             onClick={() => handleClick(".")}
             className="h-11 rounded-xl bg-white text-blue-500 shadow"
-          >          .
+          >
+          .
           </button>
         </div>
       </div>

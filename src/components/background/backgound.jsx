@@ -2,7 +2,6 @@ import React from "react";
 const Background = () => {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#9DD5F7]">
-      {/* Big Circle */}
       <div
         className="
           absolute 
@@ -17,7 +16,6 @@ const Background = () => {
           max-[768px]:top-[20%]
         "
       />
-      {/* Small Blue Bubbles */}
       <div
         className="
           absolute 
